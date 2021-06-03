@@ -97,13 +97,14 @@ export const className = `
 // render gets called after the shell command has executed. The command's output
 // is passed in as a string.
 export const render = ({ output, error }) => {
-  const img = `/taylor-swift-quote.widget${output.image}`;
+  const img = output.image;
   const quote = output.quote;
 
   return error ? (
     <div>{error}</div>
   ) : (
     <div>
+      <meta name="referrer" content="no-referrer" />
       <img className="tape" src="/taylor-swift-quote.widget/tape.png" />
 
       <div className="image">
