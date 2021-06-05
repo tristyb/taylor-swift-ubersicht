@@ -19,13 +19,23 @@ export const command = (dispatch) => {
 };
 
 export const updateState = (event, previousState) => {
-  console.log("updating state...");
   if (event.error) {
-    console.log(event.error.message);
-    return { ...previousState, error: event.error.message };
+    return {
+      ...previousState,
+      error: event.error.message
+    };
   }
-  console.log(event.data);
-  return { output: event.data };
+
+  return {
+    output: event.data
+  };
+};
+
+export const initialState = {
+  output: {
+    image: '/taylor-swift-quote.widget/images/fallback.jpg',
+    quote: 'Getting quote...',
+  }
 };
 
 // the refresh frequency in milliseconds
@@ -97,18 +107,35 @@ export const className = `
 // render gets called after the shell command has executed. The command's output
 // is passed in as a string.
 export const render = ({ output, error }) => {
-  const img = output.image;
-  const quote = output.quote;
+  let img = undefined;
+  let quote = undefined;
 
-  return error ? (
-    <div>{error}</div>
+  if (output.image) {
+    img = output.image;
+    quote = output.quote;
+  }
+
+  return img === undefined ? (
+    <div>
+      <meta name="referrer" content="no-referrer" />
+      <img className="tape" src="/taylor-swift-quote.widget/images/tape.png" />
+
+      <div className="image">
+        <img className="frame" src="/taylor-swift-quote.widget/images/frame.png" />
+        <img src='/taylor-swift-quote.widget/images/fallback.jpg' />
+      </div>
+
+      <blockquote>
+        <p>Uh-oh, uh-oh, uh-oh, uh-oh, uh-ohhhhhh</p>
+      </blockquote>
+    </div>
   ) : (
     <div>
       <meta name="referrer" content="no-referrer" />
-      <img className="tape" src="/taylor-swift-quote.widget/tape.png" />
+      <img className="tape" src="/taylor-swift-quote.widget/images/tape.png" />
 
       <div className="image">
-        <img className="frame" src="/taylor-swift-quote.widget/frame.png" />
+        <img className="frame" src="/taylor-swift-quote.widget/images/frame.png" />
         <img src={img} />
       </div>
 
