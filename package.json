@@ -1,0 +1,22 @@
+{
+  "name": "taylor-swift-quote.widget",
+  "version": "1.0.0",
+  "description": "## Intro",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tristyb/taylor-swift-ubersicht.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tristyb/taylor-swift-ubersicht/issues"
+  },
+  "homepage": "https://github.com/tristyb/taylor-swift-ubersicht#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
