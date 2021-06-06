@@ -116,7 +116,7 @@ export const render = ({ output, error }) => {
   let quote = undefined;
 
   if (output.image) {
-    img = 'f' + output.image;
+    img = output.image;
     quote = output.quote;
   }
 
