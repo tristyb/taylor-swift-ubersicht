@@ -123,6 +123,9 @@ export const render = ({ output }) => {
   let img = undefined;
   let quote = undefined;
 
+  const tape = '/taylor-swift-quote.widget/images/tape.png';
+  const frame = '/taylor-swift-quote.widget/images/frame.png';
+
   // If we have an image we know the promise resolved and we can get both.
   if (output.image) {
     img = output.image;
@@ -133,10 +136,10 @@ export const render = ({ output }) => {
   return img === undefined ? (
     <div>
       <meta name="referrer" content="no-referrer" />
-      <img className="tape" src="/taylor-swift-quote.widget/images/tape.png" />
+      <img className="tape" src={tape} />
 
       <div className="image">
-        <img className="frame" src="/taylor-swift-quote.widget/images/frame.png" />
+        <img className="frame" src={frame} />
         <img src='/taylor-swift-quote.widget/images/fallback.jpg' />
       </div>
 
@@ -147,10 +150,10 @@ export const render = ({ output }) => {
   ) : (
     <div>
       <meta name="referrer" content="no-referrer" />
-      <img className="tape" src="/taylor-swift-quote.widget/images/tape.png" />
+      <img className="tape" src={tape} />
 
       <div className="image">
-        <img className="frame" src="/taylor-swift-quote.widget/images/frame.png" />
+        <img className="frame" src={frame} />
         <img src={img} onError={addDefaultSrc} />
       </div>
 
