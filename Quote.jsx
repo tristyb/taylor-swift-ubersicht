@@ -1,12 +1,16 @@
+// The command gets the datsa for the output.
 export const command = (dispatch) => {
+  // Use promise.all to make sure we get the image url and the quote.
   Promise.all([
     fetch('/taylor-swift-quote.widget/data/images.json'),
     fetch('/taylor-swift-quote.widget/data/quotes.json')
   ]).then((responses) => {
+    // Return the responses as json from both promises.
     return Promise.all(responses.map(response => {
       return response.json();
     }));
   }).then(data => {
+    // Dispatch an object with a random image from the JSON and a random quote from the JSON.
     dispatch({
       type: 'FETCH_SUCCEDED', data: {
         image: data[0][Math.floor(Math.random() * data[0].length)],
@@ -14,10 +18,12 @@ export const command = (dispatch) => {
       }
     })
   }).catch(error => {
+    // Dispatch an error if there's been any errors.
     dispatch({ type: 'FETCH_FAILED', error });
   });
 };
 
+// This is the default update state from the ubersicht github. It just became required after I started using promises.
 export const updateState = (event, previousState) => {
   if (event.error) {
     return {
@@ -31,18 +37,18 @@ export const updateState = (event, previousState) => {
   };
 };
 
+// Add an initial state that shows the 1989 album cover and the message getting quote. You likely won't ever see this I guess.
 export const initialState = {
   output: {
-    image: '/taylor-swift-quote.widget/images/fallback.jpg',
+    image: '/taylor-swift-quote.widget/images/1989.jpg',
     quote: 'Getting quote...',
   }
 };
 
-// the refresh frequency in milliseconds
+// The refresh frequency in milliseconds.
 export const refreshFrequency = 300000;
 
 // the CSS style for this widget, written using Emotion
-// https://emotion.sh/
 export const className = `
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
   left: 2.5%;
@@ -97,6 +103,7 @@ export const className = `
     width: 100%;
     height: 100%;
     top: 0;
+    /* Top center seems to work best for most images */
     object-position: top center;
     right: 0;
     bottom: 0;
@@ -105,21 +112,24 @@ export const className = `
   }
 `
 
+// If imgur 40-somethings then this 1989 image will be used.
 function addDefaultSrc(ev) {
   ev.target.src = '/taylor-swift-quote.widget/images/1989.jpg'
 }
 
-// render gets called after the shell command has executed. The command's output
-// is passed in as a string.
-export const render = ({ output, error }) => {
+// Render gets called after the shell command has executed. The command's output is passed in as an object.
+export const render = ({ output }) => {
+  // Initially I want these to be undefined so I can check for if the image is there or not.
   let img = undefined;
   let quote = undefined;
 
+  // If we have an image we know the promise resolved and we can get both.
   if (output.image) {
     img = output.image;
     quote = output.quote;
   }
 
+  // If image is still undefined then show a fallback photo.
   return img === undefined ? (
     <div>
       <meta name="referrer" content="no-referrer" />
