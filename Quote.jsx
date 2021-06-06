@@ -1,3 +1,14 @@
+// Options.
+
+// Refresh every x minutes.
+const mins = 5;
+// Percentage from left of your screen.
+const left = 2.5;
+// Percentage from top of your screen.
+const top = 10;
+
+
+
 // The command gets the datsa for the output.
 export const command = (dispatch) => {
   // Use promise.all to make sure we get the image url and the quote.
@@ -23,6 +34,8 @@ export const command = (dispatch) => {
   });
 };
 
+
+
 // This is the default update state from the ubersicht github. It just became required after I started using promises.
 export const updateState = (event, previousState) => {
   if (event.error) {
@@ -37,6 +50,8 @@ export const updateState = (event, previousState) => {
   };
 };
 
+
+
 // Add an initial state that shows the 1989 album cover and the message getting quote. You likely won't ever see this I guess.
 export const initialState = {
   output: {
@@ -45,14 +60,18 @@ export const initialState = {
   }
 };
 
+
+
 // The refresh frequency in milliseconds.
-export const refreshFrequency = 300000;
+export const refreshFrequency = mins * 60 * 1000;
+
+
 
 // the CSS style for this widget, written using Emotion
 export const className = `
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
-  left: 2.5%;
-  top: 10%;
+  left: ${left}%;
+  top: ${top}%;
   color: white;
 
   blockquote {
@@ -110,12 +129,16 @@ export const className = `
     left: 0;
     object-fit: cover;
   }
-`
+`;
+
+
 
 // If imgur 40-somethings then this 1989 image will be used.
 function addDefaultSrc(ev) {
   ev.target.src = '/taylor-swift-quote.widget/images/1989.jpg'
 }
+
+
 
 // Render gets called after the shell command has executed. The command's output is passed in as an object.
 export const render = ({ output }) => {
