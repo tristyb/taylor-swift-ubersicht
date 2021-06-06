@@ -150,7 +150,7 @@ export const render = ({ output }) => {
   const frame = '/taylor-swift-quote.widget/images/frame.png';
 
   // If we have an image we know the promise resolved and we can get both.
-  if (output.image) {
+  if (output && output.image) {
     img = output.image;
     quote = output.quote;
   }
