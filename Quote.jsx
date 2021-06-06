@@ -80,6 +80,7 @@ export const className = `
   .image {
     width: 300px;
     height: 300px;
+    background: #d3d3d3;
     overflow: hidden;
     transform: rotate(-2deg);
     position: relative;
@@ -104,6 +105,10 @@ export const className = `
   }
 `
 
+function addDefaultSrc(ev) {
+  ev.target.src = '/taylor-swift-quote.widget/images/1989.jpg'
+}
+
 // render gets called after the shell command has executed. The command's output
 // is passed in as a string.
 export const render = ({ output, error }) => {
@@ -111,7 +116,7 @@ export const render = ({ output, error }) => {
   let quote = undefined;
 
   if (output.image) {
-    img = output.image;
+    img = 'f' + output.image;
     quote = output.quote;
   }
 
@@ -136,7 +141,7 @@ export const render = ({ output, error }) => {
 
       <div className="image">
         <img className="frame" src="/taylor-swift-quote.widget/images/frame.png" />
-        <img src={img} />
+        <img src={img} onError={addDefaultSrc} />
       </div>
 
       <blockquote>
