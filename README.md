@@ -9,3 +9,6 @@ Shortly after the API actually shut down so I grabbed the data from the project 
 ## What it does
 
 __The widget shows a random image from Imgur and a quote within a 1989 polaroid frame__
+
+## Installation
+Drag the taylor-swift-quote.widget folder to your Übersicht widgets folder.
